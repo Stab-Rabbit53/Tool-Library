@@ -111,21 +111,15 @@ function Form() {
 //import everything, set up default variables, etc etc etc.
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './react-style.css';
+import './style.css';
 import Login from './components/Login.jsx';
 import Signup from './components/Signup.jsx';
 import UI from './components/Ui.jsx';
-
-
 
 //testing for initial "is it working" test. Ignore this once we establish basic functionality. 
 const Testing = () => {
   return <div>If you can see this, react is working. Yay!</div>;
 };
-
-
-
-
 
 //This is the app. 
 //Set up state. 
@@ -160,7 +154,9 @@ function App(){
 
   //sendALoginRequest     Waiting for BE to finish and send correct response
   function sendALoginRequest(event, username, password){
+    console.log('event in sendALoginReq', event);
     event.preventDefault();
+
 
     // send a fetch with username, password.
     // get the response, check for OK
@@ -260,6 +256,4 @@ function App(){
 };    //end of App
 
 
-
-//Render
-ReactDOM.render(<App />, document.getElementById('root'));
+export default App;

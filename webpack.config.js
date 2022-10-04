@@ -1,7 +1,8 @@
 const path = require('path');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 module.exports = {
-  entry: './FrontEnd/React-index.jsx',
+  entry: './FrontEnd/index.js',
   output: {
     path: path.join(__dirname, '/dist'),
     filename: 'bundle.js',
@@ -13,9 +14,14 @@ module.exports = {
   },
   plugins: [
     new HTMLWebpackPlugin({
-      template: './FrontEnd/react-index.html',
+      template: './FrontEnd/index.html',
     }),
+    new CleanWebpackPlugin(),
   ],
+  resolve:{
+    // Enable importing JS / JSX files without specifying their extension
+    extensions: ['.js', '.jsx']
+  },
   module: {
     rules: [
       {

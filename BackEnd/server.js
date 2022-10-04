@@ -13,7 +13,8 @@ app.use(express.json());
 app.use('/api/user/items', itemRoute);
 app.use('/api/user', userRoute);
 
-app.get('/', 
+//global error handler
+app.use('/', 
   (err, request, response) => {
     response.status(400).send('Server had a misc middleware error: ' + err)
 });
