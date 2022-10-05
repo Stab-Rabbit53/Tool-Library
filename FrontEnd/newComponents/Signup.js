@@ -8,7 +8,9 @@ function SignupContainer({setUsername}) {
     e.preventDefault();
 
     const body = {username: e.target.username.value, password: e.target.password.value}
-    
+    if (!body.username || !body.password) {
+      return alert('Need both username and password input')
+    }
     try {
       const res = await fetch('/api/user/signup?', {
         method: 'POST',
