@@ -8,9 +8,14 @@ module.exports = {
     filename: 'bundle.js',
   },
   devServer: {
-    proxy: {
-      '/api': 'http://localhost:3000',
+    static: {
+      publicPath: '/dist',
+      directory: path.resolve(__dirname, 'dist')
     },
+    port: 8080
+    // proxy: {
+    //   '/api': 'http://localhost:3000',
+    // },
   },
   plugins: [
     new HTMLWebpackPlugin({

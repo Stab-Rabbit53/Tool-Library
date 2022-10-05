@@ -1,12 +1,12 @@
-import React, { setState } from 'react';
+import React, { useState } from 'react';
 // import SignupContainer from './Signup'
-import { Navigate, useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 function LoginContainer({setUsername}) {
+  const navigate = useNavigate();
 
   const handleClick = async(e) => {
     e.preventDefault();
-[[username, lisa], [password, 123]]
     const body = {username: e.target[0].value, password: e.target[1].value}
     try{
     const res = await fetch('/api/user', {
@@ -17,10 +17,10 @@ function LoginContainer({setUsername}) {
       },
       body: JSON.stringify(body)
     })
-    const receivedBack = await res.json()
+    const receivedBack = res.json()
     if(receivedBack.exist === true) {
       setUsername(body.username)
-      Navigate('/homepage')
+      navigate('/homepage')
     } else {
       alert('Wrong Information')
     }
@@ -28,16 +28,23 @@ function LoginContainer({setUsername}) {
     console.log('error')
   }
   }
+
+  const fakeFetch = () => {
+   // const body = {username: e.target[0].value}
+    setUsername(`12`)
+    navigate('/homepage')
+  }
+
   return (
     <>
     <div className='LoginDiv'>
         <h1>Please log in </h1>
-        <form className='form' onSubmit={handleClick()}>
+        <form className='form' onSubmit={fakeFetch}>
             <label>Username:</label>
-            <input type="text" id="username" name="username" onChange={(e) => username = e.target.value}></input>
+            <input type="text" id="username" name="username" ></input>
             <br></br>
             <label >Password:</label>
-            <input type="password" id="password" name="password" onChange={(e) => password = e.target.value}></input>
+            <input type="password" id="password" name="password" ></input>
             <br></br>
             <input type="submit" value="Submit"></input>
         </form>

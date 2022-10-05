@@ -1,8 +1,9 @@
 import React from 'react';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 // import SignupContainer from './newComponents/Signup'
 
 function SignupContainer({setUsername}) {
+  const navigate = useNavigate();
 
   const handleClick = async(e) => {
     e.preventDefault();
@@ -23,7 +24,7 @@ function SignupContainer({setUsername}) {
       const receivedBack = await res.json()
       if(receivedBack.exist === true) {
         setUsername(body.username)
-        Navigate('/homepage')
+        navigate('/homepage')
       } else {
         alert('Wrong Information')
       }
@@ -33,13 +34,16 @@ function SignupContainer({setUsername}) {
     }
   }
   
-
+  const fakeFetch = () => {
+    setUsername('put the username from the input field')
+    navigate('/homepage')
+  }
 
   return (
     <>
     <div className='LoginDiv'>
         <h1>Please sign up </h1>
-        <form className='form' onSubmit={handleClick()}>
+        <form className='form' onSubmit={fakeFetch}>
             <label>Username:</label>
             <input type="text" id="username" name="username" onChange={(e) => username = e.target.value}></input>
             <br></br>
