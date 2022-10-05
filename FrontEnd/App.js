@@ -11,6 +11,7 @@ function App() {
       <Routes>
         <Route path='/' element={ <LoginContainer setUsername={setUsername}/>} />
         <Route path='/homepage' element={<Homepage username={username}/>} />
+        <Route path='/signup' element={<SignupContainer />}/>
       </Routes>
     </>
   )

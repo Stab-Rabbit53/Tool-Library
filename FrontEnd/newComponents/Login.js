@@ -1,12 +1,12 @@
 import React, { setState } from 'react';
-import SignupContainer from './Signup'
+// import SignupContainer from './Signup'
 import { Navigate, useNavigate } from 'react-router-dom'
 
 function LoginContainer({setUsername}) {
 
   const handleClick = async(e) => {
     e.preventDefault();
-
+[[username, lisa], [password, 123]]
     const body = {username: e.target[0].value, password: e.target[1].value}
     try{
     const res = await fetch('/api/user', {
@@ -18,7 +18,7 @@ function LoginContainer({setUsername}) {
       body: JSON.stringify(body)
     })
     const receivedBack = await res.json()
-    if(receivedBack === true) {
+    if(receivedBack.exist === true) {
       setUsername(body.username)
       Navigate('/homepage')
     } else {
@@ -32,19 +32,19 @@ function LoginContainer({setUsername}) {
     <>
     <div className='LoginDiv'>
         <h1>Please log in </h1>
-        <form onSubmit={handleClick()}>
+        <form className='form' onSubmit={handleClick()}>
             <label>Username:</label>
             <input type="text" id="username" name="username" onChange={(e) => username = e.target.value}></input>
             <br></br>
             <label >Password:</label>
-            <input type="text" id="password" name="password" onChange={(e) => password = e.target.value}></input>
+            <input type="password" id="password" name="password" onChange={(e) => password = e.target.value}></input>
             <br></br>
             <input type="submit" value="Submit"></input>
         </form>
 
-        <button onClick={goToCreateUser}>Create A New Account</button>
+        <Link to='/signup'>Create A New Account</Link>
     </div>
-    <div className='SignupDiv'><SignupContainer /></div>
+    {/* <div className='SignupDiv'><SignupContainer /></div> */}
     </>
   )
 }
