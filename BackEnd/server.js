@@ -17,7 +17,7 @@ app.use('/api/user', userRouter);
 //global error handler
 app.use('/', 
   (err, req, res) => {
-    req.status(400).send('Server had a misc middleware error: ' + err)
+    res.status(400).send('Server had a misc middleware error: ' + err)
 });
 
 app.listen(3000, () => {
