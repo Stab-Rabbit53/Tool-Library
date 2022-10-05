@@ -1,28 +1,54 @@
 const express = require('express');
 const router = express.Router();
-const {
-  addTool, 
-  deleteTool, 
-  getGlobalItemsList, 
-  getUserItemsList
-} = require('../Controllers/itemController');
+const itemController = require('../Controllers/itemController');
 
-/* use GET method when user is routed to endpoint ../userItemsList, 
-passing in appropriate middleware to authenticate user and respond with user items data */
-router.get('/userItemsList', (req, res, next) => {
 
+//Get Requests for entire Items Lists on Component Mounting
+router.get('/ownerItemsList', 
+  itemController.getOwnerItemsList, 
+  (req, res) => {
+    res.status(200).json(res.locals.itemList);
 })
 
-/* use GET method when user is routed to endpoint ../globalItemsList, 
-passing in appropriate middleware to respond with global items list data */
-router.get('/globalItemsList', (req, res, next) =>{
-  
+router.get('/globalItemsList', 
+  itemController.getGlobalItemsList, 
+  (req, res) =>{
+    res.status(200).json(res.locals.itemList);  
 })
 
-router.post('/addTool', (req, res, next)=> {
-  
+router.get('/borrowedItemsList', 
+  itemController.getBorrowedItemsList,
+  (req, res) => {
+    res.status(200).json(res.locals.itemList)
 })
 
-router.delete('/deleteTool', (req, res, next) => {
-  
+
+//Request Endpoints for buttons to modify data in itemtable 
+router.post('/addItem',
+  itemController.addItem,
+  (req, res)=> {
+    res.status(200).end();
 })
+
+router.delete('/deleteItem',
+  itemController.deleteItem, 
+  itemController.getOwnerItemsList, 
+  (req, res)=> {
+    res.status(200).json(res.locals.itemList)
+})
+
+router.post('/returnItem', 
+  itemController.returnItem,
+  itemController.getBorrowedItemsList,
+  (req, res) => {
+    res.status(200).json(res.locals.itemList)
+})
+
+router.post('/borrowItem',
+  itemController.borrowItem,
+  itemController.getGlobalItemsList,
+  (req, res) => {
+    res.status(200).json(res.locals.itemList)
+})
+
+module.exports = router;
