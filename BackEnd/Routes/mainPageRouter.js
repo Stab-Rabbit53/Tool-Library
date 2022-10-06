@@ -24,6 +24,7 @@ router.post(
 );
 
 //Request Endpoints for buttons to modify data in itemtable
+//we might need to add middleware to re query db to set context
 router.post('/addItem', itemController.addItem, (req, res) => {
   res.status(200).end();
 });
@@ -47,7 +48,7 @@ router.patch(
   }
 );
 
-//SHOULE BE A PATCH INSTEAD OF POST
+
 router.patch(
   '/borrowItem',
   itemController.borrowItem,

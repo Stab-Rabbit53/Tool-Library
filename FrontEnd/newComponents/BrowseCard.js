@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { useItemContext } from '../contexts/itemContext';
 //need to add id in parent component
 function BrowseCard({
   itemOwner,
@@ -9,6 +9,7 @@ function BrowseCard({
   description,
   neighborhood,
 }) {
+  const itemContext = useItemContext();
   const borrow = async () => {
     const body = { id: item_id, username: username };
     try {
@@ -20,7 +21,8 @@ function BrowseCard({
         },
         body: JSON.stringify(body),
       });
-      const receivedUpdatedBack = res.json();
+      itemContext.setBorrowedItemList(username);
+      itemContext.setGlobalItemList();
       //updating the borrow person given the item id
     } catch (error) {
       console.log('err');

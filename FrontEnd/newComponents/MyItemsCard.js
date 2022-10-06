@@ -1,22 +1,9 @@
 import React from 'react';
+import { useItemContext } from '../contexts/itemContext';
+
 
 function MyItemsCard({ borrowed, item_id, username, name, description, neighborhood }) {
-  // const addToBrowse = async () => {
-  //   const body = { username: username, name: name };
-  //   try {
-  //     const res = await fetch('/mainPage/', {
-  //       method: 'PATCH',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //         Accept: 'application/json, text/plain',
-  //       },
-  //       body: JSON.stringify(body),
-  //     });
-  //     const receivedBack = res.json();
-  //   } catch (error) {
-  //     console.log('error');
-  //   }
-  // };
+  const itemContext = useItemContext();
 
   
   const deleteFromMylist = async () => {
@@ -30,16 +17,13 @@ function MyItemsCard({ borrowed, item_id, username, name, description, neighborh
         },
         body: JSON.stringify(body),
       });
-      // console.log('Delete successful');
+      itemContext.setMyItemList(username);
+      itemContext.setGlobalItemList();
 
-
-
-      const receivedDeleteBack = res.json();
     } catch (err) {
       console.log('err');
     }
   };
-  // },[]);
 
   return (
     <div className='itemCardDiv'>
@@ -50,7 +34,6 @@ function MyItemsCard({ borrowed, item_id, username, name, description, neighborh
         <div>Borrower:{borrowed}</div>
       </div>
       <div className='itemCardBtns'>
-        {/* <button onClick={addToBrowse}>Add</button> */}
         <button onClick={deleteFromMylist}>Delete</button>
       </div>
     </div>

@@ -1,47 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import BrowseCard from './BrowseCard.js';
+import { useItemContext } from '../contexts/itemContext';
 
 function BrowseContainer({ username }) {
-  //pass this from app?
-  const [items, setItems] = useState([]);
 
-  //fetch all items
+  const itemContext = useItemContext();
 
-  //   fetch('/mainPage/globalItemsList')
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       setItems(data);
-
-  //     })
-  //     .catch((err) => console.log(err));
-
-  const getGlobalItemsList = async () => {
-    try {
-      const res = await fetch('/mainPage/globalItemsList', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json, text/plain',
-        },
-      });
-      const data = await res.json();
-      // const data = await JSON.parse(res);
-      setItems(data);
-    } catch (error) {
-      console.log(error.message);
-    }
+  const getGlobalItems = () => {
+    itemContext.setGlobalItemList();
   };
 
   useEffect(() => {
     // BrowseContainer();
-    getGlobalItemsList();
+    getGlobalItems();
   }, []);
 
   return (
     <div className='browseDiv'>
-      <h1>BROWSING ALL THE ITEMS AVAILABLE meaning browser is empty</h1>
+      <h1>BROWSING ALL THE ITEMS AVAILABLE (meaning borrower is empty)</h1>
       <div>
-        {items.map((item, index) => {
+        {itemContext.itemList.globalItemList.map((item, index) => {
           return (
             <BrowseCard
               key={index}

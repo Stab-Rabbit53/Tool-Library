@@ -14,7 +14,7 @@ function App() {
 
   return (
     <div>
-      <Navbar />
+      {/* <Navbar /> */}
       <Routes>
         <Route
           path='/'
@@ -25,9 +25,9 @@ function App() {
           path='/signup'
           element={<SignupContainer setUsername={setUsername} />}
         />
-        <Route path='/create' element={<AddNewTools username={username} />} />
+        {/* <Route path='/create' element={<AddNewTools username={username} />} />
         <Route path='/browse' element={<Browse username={username} />} />
-        {/* <Route
+        <Route
           path='/userprofile'
           element={<UserItems username={username} />}
         />  */}

@@ -1,4 +1,5 @@
 import React from 'react';
+import { useItemContext } from '../contexts/itemContext';
 
 function BorrowedItemsCard({
   item_id,
@@ -8,6 +9,7 @@ function BorrowedItemsCard({
   neighborhood,
   owner
 }) {
+  const itemContext = useItemContext();
   const returnToBrowse = async () => {
     const body = {username: username, id: item_id };
     try {
@@ -19,7 +21,8 @@ function BorrowedItemsCard({
         },
         body: JSON.stringify(body),
       });
-      const receivedBack = res.json();
+      itemContext.setBorrowedItemList(username);
+      itemContext.setGlobalItemList();
       //set Context of borrowed items
       //set Context of global items 
     } catch (error) {

@@ -1,38 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import BorrowedItemsCard from './BorrowedItemsCard';
+import {useItemContext} from '../contexts/itemContext';
 
 function BorrowedItems({ username }) {
-  const [usersData, setUsersData] = useState([]);
   //fetch request for the items user borrowed
+  const itemContext = useItemContext();
 
-  const itemsUserBorrowed = async () => {
-    const body = { username: username };
-    try {
-      const res = await fetch('/mainPage/borrowedItemsList', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json, text/plain',
-        },
-        body: JSON.stringify(body),
-      });
-      //return the array with item borrowed
-      const data = await res.json();
-      setUsersData(data);
-    } catch (error) {
-      console.log(error.message);
-    }
+  const getBorrowedItems = () => {
+    itemContext.setBorrowedItemList(username);
   };
 
   useEffect(() => {
-    itemsUserBorrowed();
+    getBorrowedItems();
   }, []); //this empty array stops it from reloading
-
+  
   return (
     <>
-      <h1>ITEMS THAT THE USER IS BORROWING</h1>
+      <h1>ITEMS THAT I AM BORROWING</h1>
 
-      {usersData.map((data, index) => {
+      {itemContext.itemList.borrowedItemList.map((data, index) => {
         return (
           <BorrowedItemsCard
             username={username}

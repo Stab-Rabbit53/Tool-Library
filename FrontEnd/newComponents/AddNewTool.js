@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
+import { useItemContext } from '../contexts/itemContext';
+
 
 function AddNewTools({ username }) {
-  //item state in browse
-  // const [items, setItems] = useState('')
-  const [description, setDescription] = useState('');
-  const [neighborhood, setNeighborhood] = useState('');
+  const itemContext = useItemContext();
 
   const handleClick = async (e) => {
     e.preventDefault();
@@ -14,6 +13,9 @@ function AddNewTools({ username }) {
       neighborhood: e.target[2].value,
       username: username,
     };
+    e.target[0].value = '';
+    e.target[1].value = '';
+    e.target[2].value = '';
     try {
       const res = await fetch('/mainPage/addItem', {
         method: 'POST',
@@ -23,7 +25,10 @@ function AddNewTools({ username }) {
         },
         body: JSON.stringify(body),
       });
-      const receivedAddToolBack = res.json();
+      
+      itemContext.setMyItemList(username);
+      itemContext.setGlobalItemList();
+      
       //add tool to both my items and browse
     } catch (error) {
       console.log('error');
