@@ -8,10 +8,10 @@ const userRouter = require('./Routes/userRouter');
 
 app.use(express.json());
 
-//any call to '/api' will get routed to this server
+
 //define routes
-app.use('/api/mainPage', mainPageRouter);
-app.use('/api/user', userRouter);
+app.use('/mainPage', mainPageRouter);
+app.use('/user', userRouter);
 
 
 //global error handler

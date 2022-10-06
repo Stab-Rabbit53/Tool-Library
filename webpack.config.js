@@ -12,10 +12,10 @@ module.exports = {
       publicPath: '/dist',
       directory: path.resolve(__dirname, 'dist')
     },
-    port: 8080
-    // proxy: {
-    //   '/api': 'http://localhost:3000',
-    // },
+    port: 8080,
+    proxy: {
+      '/': 'http://localhost:3000',
+    },
   },
   plugins: [
     new HTMLWebpackPlugin({
@@ -44,12 +44,7 @@ module.exports = {
       {
         test: /\.css$/i,
         use: ['style-loader', 'css-loader'],
-      },
-      //loading images
-      //   {
-      //     test: /\.(png|svg|jpg|jpeg|gif)$/i,
-      //     type: 'asset/resource',
-      //   },
+      }
     ],
   },
 };

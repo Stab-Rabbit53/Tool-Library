@@ -14,7 +14,7 @@ ___________________
 userRouter
 ___________________
 
-get request to (/api/user/login)
+get request to (/user/login)
   expect req.body =  {
     username: String,
     password: String
@@ -25,7 +25,7 @@ get request to (/api/user/login)
     password: Boolean  (if the password matches in the DB)
   }
 
-post request to (/api/user/signup)
+post request to (/user/signup)
   expect req.body =  {
     username: String,
     password: String
@@ -39,7 +39,7 @@ __________________
 mainPageRouter
 __________________
 
-get request to (/api/mainPage/ownerItemsList)
+get request to (/mainPage/ownerItemsList)
   expect req.body = {
     username: String
   }
@@ -47,7 +47,7 @@ get request to (/api/mainPage/ownerItemsList)
     [ Objects ]   (An array of objects, with each object representing an item)
   }
 
-get request to (/api/mainPage/globalItemsList)
+get request to (/mainPage/globalItemsList)
   expect req.body = {
     nothing?
   }
@@ -55,7 +55,7 @@ get request to (/api/mainPage/globalItemsList)
     [ Objects ]   (An array of objects, with each object representing an item)
   }
 
-get request to (/api/borrowedItemsList)
+get request to (/borrowedItemsList)
   expect req.body = {
     username: String   (The logged in user)
   }
@@ -81,7 +81,7 @@ post request to (/api/mainPage/addItem)
     username: String (name of user who owns the item)
   }
   
-delete request to (/api/mainPage/deleteItem)
+delete request to (/mainPage/deleteItem)
   expect req.body = {
     id: Number (ID of the item in table)
   }
@@ -90,7 +90,7 @@ delete request to (/api/mainPage/deleteItem)
   }
 
 
-post request to (/api/mainPage/returnItem)
+post request to (/mainPage/returnItem)
   expect req.body = {
     id: Number (ID of the item in table)
   }
@@ -98,7 +98,7 @@ post request to (/api/mainPage/returnItem)
     nothing
   }
 
-post request to (/api/mainPage/borrowItem)
+post request to (/mainPage/borrowItem)
   expect req.body = {
     username: String (The logged in user)
     id: Number (ID of the item in table)
