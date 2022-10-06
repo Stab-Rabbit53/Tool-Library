@@ -1,11 +1,18 @@
 import React from 'react';
 
 //need to add id in parent component
-function BrowseCard({ id, username, name, description, neighborhood }) {
+function BrowseCard({
+  itemOwner,
+  item_id,
+  username,
+  name,
+  description,
+  neighborhood,
+}) {
   const borrow = async () => {
-    const body = { id: id, username: username };
+    const body = { id: item_id, username: username };
     try {
-      const res = await fetch('/api/browse', {
+      const res = await fetch('/mainPage/borrowItem', {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -26,6 +33,7 @@ function BrowseCard({ id, username, name, description, neighborhood }) {
         <div>name:{name}</div>
         <div>description:{description}</div>
         <div>neighborhood:{neighborhood}</div>
+        <div>Owner:{itemOwner}</div>
       </div>
       <div className='itemCardBtns'>
         <button onClick={borrow}>Borrow</button>
