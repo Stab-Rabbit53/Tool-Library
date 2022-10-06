@@ -92,7 +92,7 @@ itemController.deleteItem = (req, res, next) => {
 
 itemController.returnItem = (req, res, next) => {
   const { id } = req.body;
-  const queryString = "UPDATE itemtable SET borrowed = '' WHERE id = $1";
+  const queryString = "UPDATE itemtable SET borrowed = '' WHERE id = $1";   
   const values = [id];
   db.query(queryString, values, (err, result) => {
     if (err) {

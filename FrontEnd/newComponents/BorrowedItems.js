@@ -6,9 +6,9 @@ function BorrowedItems({ username }) {
   //fetch request for the items user borrowed
 
   const itemsUserBorrowed = async () => {
-    const body = { username: username, id: item_id };
+    const body = { username: username };
     try {
-      const res = await fetch('/mainPage/borrowItem', {
+      const res = await fetch('/mainPage/borrowedItemsList', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -26,18 +26,22 @@ function BorrowedItems({ username }) {
 
   useEffect(() => {
     itemsUserBorrowed();
-  }, []);
+  }, []); //this empty array stops it from reloading
 
   return (
     <>
+      <h1>ITEMS THAT THE USER IS BORROWING</h1>
+
       {usersData.map((data, index) => {
         return (
           <BorrowedItemsCard
             username={username}
             key={index}
+            item_id={data.id}
             name={data.name}
             description={data.description}
             neighborhood={data.neighborhood}
+            owner={data._owner}
           />
         );
       })}

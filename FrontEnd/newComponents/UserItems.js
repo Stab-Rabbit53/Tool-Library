@@ -47,7 +47,7 @@ function UserItemsContainer({ username }) {
 
   return (
     <div>
-      <h1>My Items</h1>
+      <h1>ITEMS THAT I OWN AND AM LENDING empty borrower</h1>
       {usersData.map((data, index) => {
         return (
           <MyItemsCard

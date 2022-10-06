@@ -6,9 +6,10 @@ function BorrowedItemsCard({
   name,
   description,
   neighborhood,
+  owner
 }) {
   const returnToBrowse = async () => {
-    const body = { username: username, id: item_id };
+    const body = {username: username, id: item_id };
     try {
       const res = await fetch('/mainPage/returnItem', {
         method: 'PATCH',
@@ -19,6 +20,8 @@ function BorrowedItemsCard({
         body: JSON.stringify(body),
       });
       const receivedBack = res.json();
+      //set Context of borrowed items
+      //set Context of global items 
     } catch (error) {
       console.log('error');
     }
@@ -27,9 +30,10 @@ function BorrowedItemsCard({
   return (
     <div className='itemCardDiv'>
       <div className='itemCardDetails'>
-        <div>name:{name}</div>
-        <div>description:{description}</div>
-        <div>neighborhood:{neighborhood}</div>
+        <div>name: {name}</div>
+        <div>description: {description}</div>
+        <div>neighborhood: {neighborhood}</div>
+        <div>owner: {owner}</div>
       </div>
       <div className='itemCardBtns'>
         <button onClick={returnToBrowse}>Return</button>
