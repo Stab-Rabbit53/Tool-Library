@@ -4,41 +4,47 @@ import MyItemsCard from './MyItemsCard';
 function UserItemsContainer({ username }) {
   const [usersData, setUsersData] = useState([]);
   // fetch the user's inventory
-  useEffect(() => {
+  useEffect( async () => {
     const body = { username: username };
     try {
-      const res = fetch('api/users/items', {
+      const res = await fetch('/mainPage/ownerItemsList', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          Accept: 'application/json, text/plain',
+          'Accept': 'application/json, text/plain',
         },
         body: JSON.stringify(body),
       });
-      const data = res.json();
+      const data = await res.json();
+      //data is an array of objects
+      //each object represents an item
+      /*
+      {
+        name: String, (name of item) | shovel
+        description: String, (description of item) | it digs well
+        neighborhood: String, (name of the hood) | glendale
+        _owner: String (name of user who owns the item) | jpeaches
+        borrowed: String (empty if not borrowed (''), or a string of whoever is borrowing it)
+        id: Number (automatically unique)
+      }
+      */
       setUsersData(data);
     } catch (error) {
       console.log(error.message);
     }
   }, []);
 
-  // const fakeData = [
-  //   { name: 'dskjfj', description: 'hi', neighborhood: 'hdksfjhkd' },
-  //   { name: 'sdfgs', description: 'hsdfgi', neighborhood: 'hdksfjsdfghkd' },
-  //   { name: 'sdfg', description: 'hisdfg', neighborhood: 'hdksfsdfgjhkd' },
-  // ];
-
   return (
     <div>
       {usersData.map((data, index) => {
         return (
-          <MyItemsCard
-            username={username}
-            // username='sdkjfhskjf'
+          <MyItemsCard 
             key={index}
+            username={data._owner}
             name={data.name}
             description={data.description}
             neighborhood={data.neighborhood}
+            borrowed={data.borrowed}
           />
         );
       })}

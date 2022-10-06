@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import LoginContainer from './newComponents/Login';
 import Homepage from './newComponents/Homepage';
-import SignupContainer from './newComponents/signup';
+import SignupContainer from './newComponents/Signup';
 import Navbar from './newComponents/Navbar';
 
 function App() {
@@ -23,15 +23,16 @@ function App() {
           path='/signup'
           element={<SignupContainer setUsername={setUsername} />}
         />
-        <Route path='/create' element={<AddNewTool username={username} />} />
+        {/* <Route path='/create' element={<AddNewTool username={username} />} />
         <Route path='/browse' element={<Browse username={username} />} />
         <Route
           path='/userprofile'
           element={<UserItems username={username} />}
-        />
+        /> */}
       </Routes>
     </div>
   );
 }
 
 export default App;
+
