@@ -1,45 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import MyItemsCard from './MyItemsCard';
+import { useItemContext } from '../contexts/itemContext';
 
 function UserItemsContainer({ username }) {
-  const [usersData, setUsersData] = useState([]);
   // fetch the user's inventory
+  const itemContext = useItemContext();
+  // itemContext is an object with itemList, setMyItemList, setGlobalItemList, setBorrowedItemList
 
-  const getUserItems = async () => {
-    const body = { username: username };
-    try {
-      const res = await fetch('/mainPage/ownerItemsList', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json, text/plain',
-        },
-        body: JSON.stringify(body),
-      });
-      const data = await res.json();
+  //change how we render
+  //currently rendering based on usersData state --> render based on itemList.myItemList
+  //use setUsersData(itemlist.myItemList)
 
-      //data is an array of objects
-      //each object represents an item
-      /*
-      {
-        name: String, (name of item) | shovel
-        description: String, (description of item) | it digs well
-        neighborhood: String, (name of the hood) | glendale
-        _owner: String (name of user who owns the item) | jpeaches
-        borrowed: String (empty if not borrowed (''), or a string of whoever is borrowing it)
-        id: Number (automatically unique)
-      }
-      */
-      setUsersData(data);
-    } catch (error) {
-      console.log(error.message);
-    }
+  const getUserItems = () => {
+    itemContext.setMyItemList(username);
   };
 
   useEffect(() => {
     getUserItems();
   }, []);
-  //usersData.length
 
   //1. UseContext Hook
   //2. UseEffect
@@ -47,8 +25,8 @@ function UserItemsContainer({ username }) {
 
   return (
     <div>
-      <h1>ITEMS THAT I OWN AND AM LENDING empty borrower</h1>
-      {usersData.map((data, index) => {
+      <h1>ITEMS THAT I OWN AND AM LENDING (borrower is not empty)</h1>
+      {itemContext.itemList.myItemList.map((data, index) => {
         return (
           <MyItemsCard
             item_id={data.id}

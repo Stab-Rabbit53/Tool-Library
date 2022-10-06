@@ -1,15 +1,10 @@
 import React, { useContext, useState } from 'react';
 
 const ItemContext = React.createContext();
-// const UpdateItemContext = React.createContext();
 
 export function useItemContext() {
-  return useContext(PetContext);
+  return useContext(ItemContext);
 }
-
-// export function useUpdateItemContext() {
-//   return useContext(PetUpdateContext);
-// }
 
 const defaultState = {
   myItemList: [],
@@ -18,28 +13,86 @@ const defaultState = {
 };
 
 export function ItemContextProvider({ children }) {
-  const [itemList, setItemList] = useState(defaultState);
   //    state,  setState
+  const [itemList, setItemList] = useState(defaultState);
 
-  function addPetData(newPetObj) {
-    setItemList((oldState) => {
-      if (newPetObj.hasOwnProperty('DELETEID')) {
-        //Logic to remove the object with this id from our state
-        let newState = [...oldState];
-        newState = newState.filter((element) => {
-          if (element._id === newPetObj.DELETEID) return false;
-          return true;
-        });
-        return newState;
-      }
-      if (Array.isArray(newPetObj)) return [...oldState, ...newPetObj];
-      return [...oldState, newPetObj];
-    });
-  }
+  //the itemList param should be an Array
+  //each element of the array should be an object representing an item
+  const setMyItemList = async (username) => {
+    const body = {username: username};
+    try {
+      const res = await fetch('/mainPage/ownerItemsList', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json, text/plain',
+        },
+        body: JSON.stringify(body),
+      });
+      const data = await res.json();
+      //do we need await?
+      setItemList(oldState => {
+        return {
+          ...oldState,
+          myItemList: data
+        };
+      });
+    } catch(error) {
+      console.log(error.message);
+    }
+  };
+
+  const setGlobalItemList = async () => {
+    try {
+      const res = await fetch('/mainPage/globalItemsList', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json, text/plain',
+        },
+      });
+      const data = await res.json();
+      setItemList(oldState => {
+        return {
+          ...oldState,
+          globalItemList: data
+        };
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+  }; 
+
+
+  const setBorrowedItemList = async (username) => {
+    const body = { username: username };
+    try {
+      const res = await fetch('/mainPage/borrowedItemsList', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json, text/plain',
+        },
+        body: JSON.stringify(body),
+      });
+      //return the array with item borrowed
+      const data = await res.json();
+      setItemList(oldState => {
+        return {
+          ...oldState,
+          borrowedItemList: data
+        };
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+  //should define function(s) to setState,
+  //these functions should call setItemList within them
 
   return (
-    <PetContext.Provider value={(itemList, addPetData)}>
+    <ItemContext.Provider value={{itemList, setMyItemList, setGlobalItemList, setBorrowedItemList}}>
       {children}
-    </PetContext.Provider>
+    </ItemContext.Provider>
   );
 }
