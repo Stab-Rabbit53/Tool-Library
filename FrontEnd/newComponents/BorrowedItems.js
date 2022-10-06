@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import MyItemsCard from './MyItemsCard';
+import React, { useState } from 'react';
+import BorrowedItemsCard from './BorrowedItemsCard';
 
-function UserItemsContainer({ username }) {
+function BorrowedItems({ username }) {
   const [usersData, setUsersData] = useState([]);
-  // fetch the user's inventory
+  //fetch request for the items user borrowed
   useEffect(() => {
     const body = { username: username };
     try {
@@ -15,6 +15,7 @@ function UserItemsContainer({ username }) {
         },
         body: JSON.stringify(body),
       });
+      //return the array with item borrowed
       const data = res.json();
       setUsersData(data);
     } catch (error) {
@@ -22,19 +23,12 @@ function UserItemsContainer({ username }) {
     }
   }, []);
 
-  // const fakeData = [
-  //   { name: 'dskjfj', description: 'hi', neighborhood: 'hdksfjhkd' },
-  //   { name: 'sdfgs', description: 'hsdfgi', neighborhood: 'hdksfjsdfghkd' },
-  //   { name: 'sdfg', description: 'hisdfg', neighborhood: 'hdksfsdfgjhkd' },
-  // ];
-
   return (
-    <div>
+    <>
       {usersData.map((data, index) => {
         return (
-          <MyItemsCard
+          <BorrowedItemsCard
             username={username}
-            // username='sdkjfhskjf'
             key={index}
             name={data.name}
             description={data.description}
@@ -42,8 +36,8 @@ function UserItemsContainer({ username }) {
           />
         );
       })}
-    </div>
+    </>
   );
 }
 
-export default UserItemsContainer;
+export default BorrowedItems;

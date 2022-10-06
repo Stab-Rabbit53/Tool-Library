@@ -105,8 +105,6 @@ function Form() {
 
 */
 
-
-
 //setup stuff
 //import everything, set up default variables, etc etc etc.
 import React from 'react';
@@ -116,47 +114,46 @@ import Login from './components/Login.jsx';
 import Signup from './components/Signup.jsx';
 import UI from './components/Ui.jsx';
 
-//testing for initial "is it working" test. Ignore this once we establish basic functionality. 
+//testing for initial "is it working" test. Ignore this once we establish basic functionality.
 const Testing = () => {
   return <div>If you can see this, react is working. Yay!</div>;
 };
 
-//This is the app. 
-//Set up state. 
+//This is the app.
+//Set up state.
 //Set up functions.
-//Set up conditional display.  
-function App(){
+//Set up conditional display.
+function App() {
   //state Stuff
   //more to be added.
   const [userDetails, setUserDetails] = React.useState({
-    firstName:"", 
-    lastName:"", 
-    username:"", 
-    password:"",
+    firstName: '',
+    lastName: '',
+    username: '',
+    password: '',
     isLoggedIn: false,
     isUser: true,
     userThings: {},
-    searchedThings: {}
+    searchedThings: {},
   });
 
   //functions stuff
   //For testing
-  function consoleLogForTesting(){
-    console.log('Your console log for testing is firing off!')
+  function consoleLogForTesting() {
+    console.log('Your console log for testing is firing off!');
   }
 
-  //go to the create user page. 
-  function goToCreateUser(){
-    console.log('You clicked to go to the create user page')
+  //go to the create user page.
+  function goToCreateUser() {
+    console.log('You clicked to go to the create user page');
     //change the isUser in state to false
-    setUserDetails((userDetails) => ({...userDetails,...{isUser: false}}));
+    setUserDetails((userDetails) => ({ ...userDetails, ...{ isUser: false } }));
   }
 
   //sendALoginRequest     Waiting for BE to finish and send correct response
-  function sendALoginRequest(event, username, password){
+  function sendALoginRequest(event, username, password) {
     console.log('event in sendALoginReq', event);
     event.preventDefault();
-
 
     // send a fetch with username, password.
     // get the response, check for OK
@@ -165,24 +162,26 @@ function App(){
 
     fetch('/api/user/login', {
       method: 'POST',
-      body: JSON.stringify({username: username , password: password}),
-      headers:{
-          'Content-Type': 'application/json'
+      body: JSON.stringify({ username: username, password: password }),
+      headers: {
+        'Content-Type': 'application/json',
       },
     })
-      //check that status code is 200, change state isUser to true, isLoggedIn to true if so. 
-      .then(data => {
-        console.log('What is the response code?', data.status)
-        if(data.status === 200){
-          setUserDetails((userDetails) => ({...userDetails,...{isUser: true, isLoggedIn: true, username: username}}));
+      //check that status code is 200, change state isUser to true, isLoggedIn to true if so.
+      .then((data) => {
+        console.log('What is the response code?', data.status);
+        if (data.status === 200) {
+          setUserDetails((userDetails) => ({
+            ...userDetails,
+            ...{ isUser: true, isLoggedIn: true, username: username },
+          }));
         }
-
       })
-      .then()
+      .then();
   } //end sendALoginRequest
 
-    //create a user       Waiting for BE to finish password fix in DB.
-  function sendACreateUserRequest(event, username, password, email){
+  //create a user       Waiting for BE to finish password fix in DB.
+  function sendACreateUserRequest(event, username, password, email) {
     event.preventDefault();
 
     // send a fetch with username, password, and email.
@@ -192,68 +191,88 @@ function App(){
 
     fetch('/api/user/create', {
       method: 'POST',
-      body: JSON.stringify({username: username , password: password, email: email}),
-      headers:{
-          'Content-Type': 'application/json'
+      body: JSON.stringify({
+        username: username,
+        password: password,
+        email: email,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
       },
     })
-      //check that status code is 200, change state isUser to true, isLoggedIn to true if so. 
-      .then(data => {
-        if(data.status === 200){
-          setUserDetails((userDetails) => ({...userDetails,...{isUser: true, isLoggedIn: true, username: username}}));
+      //check that status code is 200, change state isUser to true, isLoggedIn to true if so.
+      .then((data) => {
+        if (data.status === 200) {
+          setUserDetails((userDetails) => ({
+            ...userDetails,
+            ...{ isUser: true, isLoggedIn: true, username: username },
+          }));
         }
+      });
+  } //end of sendACreateUserRequest
 
-      })
+  function getUserDetails(event, username) {
+    event.preventDefault();
 
-    } //end of sendACreateUserRequest
+    // send a fetch with username.
+    // get the response, check for OK
+    // update state
+    // Stick an error message if we get an error
 
+    fetch('/api/user/items', {
+      method: 'POST',
+      body: JSON.stringify({ username: userDetails.username }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      //assuming I get back and object with all their Things, I need to stick them all in userThings
+      .then((result) => result.json())
+      .then((data) => {
+        if (data.status === 200) {
+          setUserDetails((userDetails) => ({
+            ...userDetails,
+            ...{ userThings: data },
+          }));
+        }
+      });
+  } //end of sendACreateUserRequest
 
-
-    function getUserDetails(event, username){
-      event.preventDefault();
-  
-      // send a fetch with username.
-      // get the response, check for OK
-      // update state 
-      // Stick an error message if we get an error
-  
-      fetch('/api/user/items', {
-        method: 'POST',
-        body: JSON.stringify({username: userDetails.username}),
-        headers:{
-            'Content-Type': 'application/json'
-        },
-      })
-        //assuming I get back and object with all their Things, I need to stick them all in userThings
-        .then(result => result.json())
-        .then(data => {
-          if(data.status === 200){
-            setUserDetails((userDetails) => ({...userDetails,...{userThings: data}}));
-          }
-        });
-  
-      } //end of sendACreateUserRequest
-
-
-
-
-  
   //console.log('We are doing our conditional etc etc')
-  console.log('Current user details are... ', userDetails)
+  console.log('Current user details are... ', userDetails);
   //conditional display
-  if(userDetails.isUser === false && userDetails.isLoggedIn === false){          //They're not a user, do the signup screen.
-    return <div id = 'screen'><Signup sendACreateUserRequest={sendACreateUserRequest}/></div>;
+  if (userDetails.isUser === false && userDetails.isLoggedIn === false) {
+    //They're not a user, do the signup screen.
+    return (
+      <div id='screen'>
+        <Signup sendACreateUserRequest={sendACreateUserRequest} />
+      </div>
+    );
   }
-  if(userDetails.isLoggedIn === false && userDetails.isUser === true){         //Not logged in, do the login screen.
-    return <div id = 'screen'><Login sendALoginRequest={sendALoginRequest} goToCreateUser={goToCreateUser}/></div>;
+  if (userDetails.isLoggedIn === false && userDetails.isUser === true) {
+    //Not logged in, do the login screen.
+    return (
+      <div id='screen'>
+        <Login
+          sendALoginRequest={sendALoginRequest}
+          goToCreateUser={goToCreateUser}
+        />
+      </div>
+    );
   }
-  if(userDetails.isLoggedIn === true && userDetails.isUser === true){          //They're logged in, do the main screen.
+  if (userDetails.isLoggedIn === true && userDetails.isUser === true) {
+    //They're logged in, do the main screen.
     getUserDetails(userDetails.username);
-    return <div id = 'screen'><UI consoleLogForTesting={consoleLogForTesting} username={userDetails.username} userThings={userDetails.userThings} /></div>;
+    return (
+      <div id='screen'>
+        <UI
+          consoleLogForTesting={consoleLogForTesting}
+          username={userDetails.username}
+          userThings={userDetails.userThings}
+        />
+      </div>
+    );
   }
-
-
-};    //end of App
-
+} //end of App
 
 export default App;
