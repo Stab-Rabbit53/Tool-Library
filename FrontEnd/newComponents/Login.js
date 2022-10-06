@@ -53,7 +53,6 @@ function LoginContainer({ setUsername }) {
 
         <Link to='/signup'>Create A New Account</Link>
       </div>
-      {/* <div className='SignupDiv'><SignupContainer /></div> */}
     </>
   );
 }

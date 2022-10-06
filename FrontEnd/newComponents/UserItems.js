@@ -5,7 +5,6 @@ import { useItemContext } from '../contexts/itemContext';
 function UserItemsContainer({ username }) {
   // fetch the user's inventory
   const itemContext = useItemContext();
-  // console.log('item Context in UserItems Component', itemContext);
   // itemContext is an object with itemList, setMyItemList, setGlobalItemList, setBorrowedItemList
 
   //change how we render
@@ -19,7 +18,6 @@ function UserItemsContainer({ username }) {
   useEffect(() => {
     getUserItems();
   }, []);
-  //usersData.length
 
   //1. UseContext Hook
   //2. UseEffect
