@@ -1,10 +1,16 @@
 import React from 'react';
 
-function BorrowedItemsCard({ username, name, description, neighborhood }) {
+function BorrowedItemsCard({
+  item_id,
+  username,
+  name,
+  description,
+  neighborhood,
+}) {
   const returnToBrowse = async () => {
-    const body = { username: username, name: name };
+    const body = { username: username, id: item_id };
     try {
-      const res = await fetch('/api/user', {
+      const res = await fetch('/mainPage/returnItem', {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',

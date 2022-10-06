@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function AddTools() {
+function AddNewTools({ username }) {
   //item state in browse
   // const [items, setItems] = useState('')
   const [description, setDescription] = useState('');
@@ -9,15 +9,15 @@ function AddTools() {
   const handleClick = async (e) => {
     e.preventDefault();
     const body = {
-      item: e.target[0].value,
+      name: e.target[0].value,
       description: e.target[1].value,
       neighborhood: e.target[2].value,
+      username: username,
     };
-
     try {
-      const res = await fetch('/api/user/addTool', {
+      const res = await fetch('/mainPage/addItem', {
         method: 'POST',
-        header: {
+        headers: {
           'Content-Type': 'application/json',
           Accept: 'application/json, text/plain',
         },
@@ -34,16 +34,16 @@ function AddTools() {
     <div className='addToolsDiv' onSubmit={handleClick}>
       <h1>add new items</h1>
       <form className='form'>
-        <input type='text' id='item' />
         <lable>item name</lable>
-        <input type='text' id='description' />
+        <input type='text' id='item' />
         <lable>description</lable>
-        <input type='text' id='neighborhood' />
+        <input type='text' id='description' />
         <lable>neighborhood</lable>
+        <input type='text' id='neighborhood' />
         <input type='submit' value='add' />
       </form>
     </div>
   );
 }
 
-export default AddTools;
+export default AddNewTools;

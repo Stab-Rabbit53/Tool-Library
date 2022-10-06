@@ -4,18 +4,20 @@ import MyItemsCard from './MyItemsCard';
 function UserItemsContainer({ username }) {
   const [usersData, setUsersData] = useState([]);
   // fetch the user's inventory
-  useEffect( async () => {
+
+  const getUserItems = async () => {
     const body = { username: username };
     try {
       const res = await fetch('/mainPage/ownerItemsList', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Accept': 'application/json, text/plain',
+          Accept: 'application/json, text/plain',
         },
         body: JSON.stringify(body),
       });
       const data = await res.json();
+
       //data is an array of objects
       //each object represents an item
       /*
@@ -32,13 +34,24 @@ function UserItemsContainer({ username }) {
     } catch (error) {
       console.log(error.message);
     }
+  };
+
+  useEffect(() => {
+    getUserItems();
   }, []);
+  //usersData.length
+
+  //1. UseContext Hook
+  //2. UseEffect
+  //3. Combine UserItems with ItemsCard
 
   return (
     <div>
+      <h1>My Items</h1>
       {usersData.map((data, index) => {
         return (
-          <MyItemsCard 
+          <MyItemsCard
+            item_id={data.id}
             key={index}
             username={data._owner}
             name={data.name}

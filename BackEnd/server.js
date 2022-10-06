@@ -8,17 +8,14 @@ const userRouter = require('./Routes/userRouter');
 
 app.use(express.json());
 
-
 //define routes
 app.use('/mainPage', mainPageRouter);
 app.use('/user', userRouter);
 
-
 //global error handler
-app.use('/', 
-  (err, req, res) => {
-    console.log(err)
-    res.status(400).send('Server had a middleware error: ' + err)
+app.use('/', (err, req, res) => {
+  console.log(err);
+  res.status(400).send('Server had a middleware error: ' + err);
 });
 
 app.listen(3000, () => {

@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import BorrowedItemsCard from './BorrowedItemsCard';
 
 function BorrowedItems({ username }) {
   const [usersData, setUsersData] = useState([]);
   //fetch request for the items user borrowed
-  useEffect(() => {
-    const body = { username: username };
+
+  const itemsUserBorrowed = async () => {
+    const body = { username: username, id: item_id };
     try {
-      const res = fetch('api/users/items', {
+      const res = await fetch('/mainPage/borrowItem', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -16,11 +17,15 @@ function BorrowedItems({ username }) {
         body: JSON.stringify(body),
       });
       //return the array with item borrowed
-      const data = res.json();
+      const data = await res.json();
       setUsersData(data);
     } catch (error) {
       console.log(error.message);
     }
+  };
+
+  useEffect(() => {
+    itemsUserBorrowed();
   }, []);
 
   return (

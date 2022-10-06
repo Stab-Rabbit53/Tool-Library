@@ -4,6 +4,8 @@ import LoginContainer from './newComponents/Login';
 import Homepage from './newComponents/Homepage';
 import SignupContainer from './newComponents/Signup';
 import Navbar from './newComponents/Navbar';
+import AddNewTools from './newComponents/AddNewTool';
+import Browse from './newComponents/Browse';
 
 function App() {
   const [username, setUsername] = useState('');
@@ -23,16 +25,15 @@ function App() {
           path='/signup'
           element={<SignupContainer setUsername={setUsername} />}
         />
-        {/* <Route path='/create' element={<AddNewTool username={username} />} />
+        <Route path='/create' element={<AddNewTools username={username} />} />
         <Route path='/browse' element={<Browse username={username} />} />
-        <Route
+        {/* <Route
           path='/userprofile'
           element={<UserItems username={username} />}
-        /> */}
+        />  */}
       </Routes>
     </div>
   );
 }
 
 export default App;
-
