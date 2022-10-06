@@ -10,7 +10,7 @@ function Homepage({ username }) {
       <h1>HomePage</h1>
       <AddTools username={username} />
       <UserItemsContainer username={username} />
-      {/* <BorrowedItems username={username} /> */}
+      <BorrowedItems username={username} />
       <BrowseContainer username={username} />
     </div>
   );

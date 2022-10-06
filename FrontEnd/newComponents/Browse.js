@@ -39,7 +39,7 @@ function BrowseContainer({ username }) {
 
   return (
     <div className='browseDiv'>
-      <h1>Browse All Items</h1>
+      <h1>BROWSING ALL THE ITEMS AVAILABLE meaning browser is empty</h1>
       <div>
         {items.map((item, index) => {
           return (

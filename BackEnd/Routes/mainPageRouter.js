@@ -15,7 +15,7 @@ router.get(
   }
 );
 
-router.get(
+router.post(
   '/borrowedItemsList',
   itemController.getBorrowedItemsList,
   (req, res) => {
@@ -38,7 +38,7 @@ router.delete(
   }
 );
 
-router.post(
+router.patch(
   '/returnItem',
   itemController.returnItem,
   itemController.getBorrowedItemsList,
