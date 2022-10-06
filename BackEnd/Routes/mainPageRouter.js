@@ -4,7 +4,7 @@ const itemController = require('../Controllers/itemController');
 
 
 //Get Requests for entire Items Lists on Component Mounting
-router.get('/ownerItemsList', 
+router.post('/ownerItemsList', 
   itemController.getOwnerItemsList, 
   (req, res) => {
     res.status(200).json(res.locals.itemList);

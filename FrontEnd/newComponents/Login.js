@@ -8,39 +8,41 @@ function LoginContainer({ setUsername }) {
   const handleClick = async (e) => {
     e.preventDefault();
     const body = { username: e.target[0].value, password: e.target[1].value };
+    console.log(body)
     try {
-      const res = await fetch('/api/user', {
+      const res = await fetch('/user/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          Accept: 'application/json, text/plain',
+          'Accept': 'application/json, text/plain',
         },
         body: JSON.stringify(body),
       });
-      const receivedBack = res.json();
-      if (receivedBack.exist === true) {
+      const receivedBack = await res.json();
+     
+      //receivedBack will be an object with two properties: username, password
+      //username will be true if username exists, password will be true if password matches
+      
+      //both username and password are true, means route them to mainPage, preserving the username in state
+      if (receivedBack.login === true) {
         setUsername(body.username);
         navigate('/homepage');
+        
+      //if either false, then let them know login information is invalid/incorrect
       } else {
         alert('Wrong Information');
       }
     } catch (error) {
-      console.log('error');
+      console.log('123error');
     }
   };
-
-  const fakeFetch = (e) => {
-    e.preventDefault();
-    // const body = {username: e.target[0].value}
-    setUsername(`12`);
-    navigate('/homepage');
-  };
+ 
 
   return (
     <>
       <div className='LoginDiv'>
         <h1>Please log in </h1>
-        <form className='form' onSubmit={fakeFetch}>
+        <form className='form' onSubmit={handleClick}>
           <label>Username:</label>
           <input type='text' id='username' name='username'></input>
           <br></br>

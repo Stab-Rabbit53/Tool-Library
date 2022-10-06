@@ -25,16 +25,16 @@ userController.verifyUser = (req, res, next) => {
     if(result.rows.length){
       //username exists in DB AND password matches
       if (username === result.rows[0].username && password === result.rows[0].password){
-        res.locals.user = {username: true, password: true};
+        res.locals.user = {login: true};
         return next()
       //username exists in DB BUT password does not match
       }else if (password !== result.rows[0].password){
-        res.locals.user = {username: true, password: false};
+        res.locals.user = {login: false};
         return next()
         }
     }else{
       //username does not exist
-      res.locals.user = {username: false, password: false};
+      res.locals.user = {login: false};
       return next()
     }
   });
@@ -54,7 +54,7 @@ userController.addUser = (req, res, next) => {
     if(err){
       return next('error in addUser db.query', err)
     }else{
-      res.locals.username = {username: username};
+      res.locals.added = {added: true};
       return next();
     }
   })
