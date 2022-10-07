@@ -1,0 +1,189 @@
+
+body{
+  background-color: rgba(201, 225, 225, 0.8);
+  font-family: 'Montserrat', sans-serif;
+  
+  margin: 0;
+  padding:0;
+// font-family: 'Oswald', sans-serif;
+}
+
+.loginDiv {
+  background-color: rgb(170, 217, 225);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 400px;
+  height: 260px;
+  margin: auto;
+  border-radius: 15px;
+  border: 2px solid rgba(35, 35, 35, 0.5);
+  box-shadow: 0px 8px 32px 8px rgba(0,0,0,0.35);
+  padding-bottom: 10px;
+}
+
+.loginDiv input{
+  cursor: pointer;
+}
+
+.inputFields{
+  width: 250px;
+  height: 35px;
+  border-radius: 15px;
+  font-size: 15px;
+  border: none;
+  outline: none;
+}
+
+input[type=text]{
+  text-align: center;
+}
+
+input[type=password]{
+  text-align: center;
+  // padding-left: 10px;
+}
+
+input:focus::placeholder {
+  top: 0px;
+  font-size: 13px;
+  transition: 0.4s ease all;
+}
+
+.loginDivBtn {
+  background-color: rgb(133, 175, 193);
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 15px;
+  padding: 10px 20px;
+  margin-bottom: 10px;
+  box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.062);
+}
+
+.loginDivBtn:hover {
+  background-color: #F0858D;
+}
+
+.loginDivForm{
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  align-items: center;
+  justify-content: center;
+}
+
+.loginDivForm a:hover {
+  color: white;
+}
+
+#newAccBtn{
+  text-decoration: none;
+  color: rgb(54, 54, 130);
+  font-size: 14px;
+}
+
+#newAccBtn:hover{
+  text-decoration: underline;
+}
+
+#signinDiv {
+  margin-top: 15%
+}
+
+#homepageTitle{
+  margin-top: 0;
+  text-align: center;
+  padding: 10px;
+  border: 1px solid rgb(185, 185, 185);
+  box-shadow: 0px 0px 10px rgba(0,0,0,0.2)
+  // margin: auto;
+}
+
+#title {
+  display: flex;
+  justify-content: center;
+  font-size: 110px;
+}
+
+#homepage-main-div {
+  display: flex;
+  justify-content: space-around;
+}
+
+.addToolsForm {
+  // padding: 2em;
+  color: black;
+  font-size: larger;
+  background-color: #F0858D;
+  flex-direction: column;
+  display: flex;
+  justify-content: space-evenly;  
+  align-items: center;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  // width: 100%;
+  border-radius: 15px;
+  border: 2px solid rgba(35, 35, 35, 0.5);
+  box-shadow: 0px 8px 32px 8px rgba(0,0,0,0.35);
+}
+
+.addToolInputFields{
+  height: 30px;
+  margin: 6px;
+  border-radius: 8px;
+  font-size: 13px;
+  border: none;
+  outline: none;
+}
+
+.addToolsBtn{
+  padding: 8px 15px;
+  background-color: #aad9e1;
+  border-radius: 5px;
+  border: 0;
+  margin-top: 10px;
+  margin-bottom: 8px;
+}
+
+.addToolsBtn:hover {
+  background-color: #e75b65;
+  color: white
+}
+
+// .item-list-container {
+//   display: flex;
+//   flex-direction: column;
+// }
+
+.itemCardDiv {
+  padding: 10px;
+  color: black;
+  font-size: larger;
+  background-color: #aad9e1;
+  flex-direction: column;
+  // max-width: 33%;
+  display: flex;
+  justify-content: center;
+  //box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.096);
+  border-radius: 5px;
+  margin-bottom: 10px;
+  // width: 100%;
+  border-radius: 15px;
+  border: 2px solid rgba(35, 35, 35, 0.5);
+  box-shadow: 0px 8px 32px 8px rgba(0,0,0,0.35);
+  // font-weight:400;
+}
+
+.itemCardBtns button{
+  padding: 8px 15px;
+  background-color: #F0858D;
+  border-radius: 5px;
+  border: 0;
+  margin-top: 10px;
+}
+
+.itemCardBtns button:hover {
+  background-color: #52c7db;
+}

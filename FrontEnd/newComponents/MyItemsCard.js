@@ -28,10 +28,10 @@ function MyItemsCard({ borrowed, item_id, username, name, description, neighborh
   return (
     <div className='itemCardDiv'>
       <div className='itemCardDetails'>
-        <div>name:{name}</div>
-        <div>description:{description}</div>
-        <div>neighborhood:{neighborhood}</div>
-        <div>Borrower:{borrowed}</div>
+        <div><b>Name:</b> {name}</div>
+        <div><b>Description:</b> {description}</div>
+        <div><b>Neighborhood:</b>{ neighborhood}</div>
+        <div><b>Borrower:</b> {borrowed}</div>
       </div>
       <div className='itemCardBtns'>
         <button onClick={deleteFromMylist}>Delete</button>

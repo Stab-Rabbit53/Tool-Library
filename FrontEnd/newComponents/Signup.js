@@ -38,27 +38,29 @@ function SignupContainer({ setUsername }) {
 
   return (
     <>
-      <div className='LoginDiv'>
-        <h1>Please sign up </h1>
-        <form className='form' onSubmit={handleClick}>
-          <label>Username:</label>
+      <div className='loginDiv' id="signinDiv">
+        <h1>Please Sign Up </h1>
+        <form className='loginDivForm' onSubmit={handleClick}>
           <input
+            className="inputFields"
             type='text'
             id='username'
             name='username'
+            placeholder="Username"
           ></input>
           <br></br>
-          <label>Password:</label>
           <input
+            className="inputFields"
             type='password'
             id='password'
             name='password'
+            placeholder="Password"
           ></input>
           <br></br>
-          <input type='submit' value='Submit'></input>
+          <input className="loginDivBtn" type='submit' value='Sign Up'></input>
         </form>
 
-        {/* <Link to='/signup'>Go back to Login</Link> */}
+        <Link to='/' id='newAccBtn'>Go back to Login</Link>
       </div>
     </>
   );

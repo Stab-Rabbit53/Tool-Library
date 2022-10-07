@@ -8,15 +8,21 @@ import { ItemContextProvider } from '../contexts/itemContext';
 
 function Homepage({ username }) {
   return (
-    <div>
-      <ItemContextProvider>
-        <h1>Welcome, {username.toUpperCase()}</h1>
-        <AddTools username={username} />
-        <UserItemsContainer username={username} />
-        <BorrowedItems username={username} />
-        <BrowseContainer username={username} />
-      </ItemContextProvider>
-    </div>
+    <ItemContextProvider>
+      <h1 id="homepageTitle">Welcome, {username[0].toUpperCase() + username.slice(1).toLowerCase()}</h1>
+      <div id="homepage-main-div">
+        <div id="user-item-container">
+          <AddTools username={username} />
+          <UserItemsContainer username={username} />
+        </div>
+        <div>
+          <BorrowedItems username={username} />
+        </div>
+        <div>
+          <BrowseContainer username={username} />
+        </div>
+      </div>
+    </ItemContextProvider>
   );
 }
 
