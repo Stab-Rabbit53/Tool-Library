@@ -39,19 +39,18 @@ function LoginContainer({ setUsername }) {
 
   return (
     <>
-      <div className='LoginDiv'>
-        <h1>Please log in </h1>
-        <form className='form' onSubmit={handleClick}>
-          <label>Username:</label>
-          <input type='text' id='username' name='username'></input>
+      <h1 id= 'title'>LENDR</h1>
+      <div className='loginDiv'>
+        <h1>Please Log In </h1>
+        <form className='loginDivForm' onSubmit={handleClick}>
+          <input className="inputFields" type='text' id='username' name='username' placeholder="Username"></input>
           <br></br>
-          <label>Password:</label>
-          <input type='password' id='password' name='password'></input>
+          <input className="inputFields" type='password' id='password' name='password' placeholder='Password'></input>
           <br></br>
-          <input type='submit' value='Submit'></input>
+          <input className="loginDivBtn" type='submit' value='Login'></input>
         </form>
 
-        <Link to='/signup'>Create A New Account</Link>
+        <Link to='/signup' id='newAccBtn'>Create A New Account</Link>
       </div>
     </>
   );

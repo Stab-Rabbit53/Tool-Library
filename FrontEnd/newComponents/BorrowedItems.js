@@ -15,23 +15,24 @@ function BorrowedItems({ username }) {
   }, []); //this empty array stops it from reloading
   
   return (
-    <>
-      <h1>ITEMS THAT I AM BORROWING</h1>
-
-      {itemContext.itemList.borrowedItemList.map((data, index) => {
-        return (
-          <BorrowedItemsCard
-            username={username}
-            key={index}
-            item_id={data.id}
-            name={data.name}
-            description={data.description}
-            neighborhood={data.neighborhood}
-            owner={data._owner}
-          />
-        );
-      })}
-    </>
+    <div>
+      <h1 className="column-h1">Borrowed Items</h1>
+      <div className='item-list-container'>
+        {itemContext.itemList.borrowedItemList.map((data, index) => {
+          return (
+            <BorrowedItemsCard
+              username={username}
+              key={index}
+              item_id={data.id}
+              name={data.name}
+              description={data.description}
+              neighborhood={data.neighborhood}
+              owner={data._owner}
+            />
+          );
+        })}
+      </div>
+    </div>
   );
 }
 

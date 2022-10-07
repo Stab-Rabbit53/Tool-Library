@@ -16,9 +16,9 @@ function BrowseContainer({ username }) {
   }, []);
 
   return (
-    <div className='browseDiv'>
-      <h1>BROWSING ALL THE ITEMS AVAILABLE (meaning borrower is empty)</h1>
-      <div>
+    <div>
+      <h1 className="column-h1">Browse Items</h1>
+      <div className='item-list-container'>
         {itemContext.itemList.globalItemList.map((item, index) => {
           return (
             <BrowseCard

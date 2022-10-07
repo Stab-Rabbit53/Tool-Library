@@ -25,20 +25,22 @@ function UserItemsContainer({ username }) {
 
   return (
     <div>
-      <h1>ITEMS THAT I OWN AND AM LENDING (borrower is not empty)</h1>
-      {itemContext.itemList.myItemList.map((data, index) => {
-        return (
-          <MyItemsCard
-            item_id={data.id}
-            key={index}
-            username={data._owner}
-            name={data.name}
-            description={data.description}
-            neighborhood={data.neighborhood}
-            borrowed={data.borrowed}
-          />
-        );
-      })}
+      <h1 className="column-h1">My Items</h1>
+      <div className='item-list-container'>
+        {itemContext.itemList.myItemList.map((data, index) => {
+          return (
+            <MyItemsCard
+              item_id={data.id}
+              key={index}
+              username={data._owner}
+              name={data.name}
+              description={data.description}
+              neighborhood={data.neighborhood}
+              borrowed={data.borrowed}
+            />
+          );
+        })}
+      </div>
     </div>
   );
 }

@@ -37,15 +37,18 @@ function AddNewTools({ username }) {
 
   return (
     <div className='addToolsDiv' onSubmit={handleClick}>
-      <h1>add new items</h1>
-      <form className='form'>
-        <lable>item name</lable>
-        <input type='text' id='item' />
-        <lable>description</lable>
-        <input type='text' id='description' />
-        <lable>neighborhood</lable>
-        <input type='text' id='neighborhood' />
-        <input type='submit' value='add' />
+      <h1>Add New Item</h1>
+      <form className='addToolsForm'>
+        <div>
+          <input className="addToolInputFields" type='text' id='item' placeholder='Item Name'/>
+        </div>
+        <div>
+          <input className="addToolInputFields" type='text' id='description' placeholder='Description'/>
+        </div>
+        <div>
+          <input className="addToolInputFields" type='text' id='neighborhood' placeholder='Neighborhood'/>
+        </div>
+        <input className="addToolsBtn"type='submit' value='Add' />
       </form>
     </div>
   );
