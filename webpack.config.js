@@ -1,21 +1,32 @@
 const path = require('path');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 module.exports = {
-  entry: './FrontEnd/React-index.jsx',
+  entry: './FrontEnd/index.js',
   output: {
     path: path.join(__dirname, '/dist'),
     filename: 'bundle.js',
   },
   devServer: {
+    static: {
+      publicPath: '/dist',
+      directory: path.resolve(__dirname, 'dist')
+    },
+    port: 8080,
     proxy: {
-      '/api': 'http://localhost:3000',
+      '/': 'http://localhost:3000',
     },
   },
   plugins: [
     new HTMLWebpackPlugin({
-      template: './FrontEnd/react-index.html',
+      template: './FrontEnd/index.html',
     }),
+    new CleanWebpackPlugin(),
   ],
+  resolve:{
+    // Enable importing JS / JSX files without specifying their extension
+    extensions: ['.js', '.jsx']
+  },
   module: {
     rules: [
       {
@@ -31,14 +42,9 @@ module.exports = {
       },
       //css
       {
-        test: /\.css$/i,
-        use: ['style-loader', 'css-loader'],
-      },
-      //loading images
-      //   {
-      //     test: /\.(png|svg|jpg|jpeg|gif)$/i,
-      //     type: 'asset/resource',
-      //   },
+        test: /\.s?css$/i,
+        use: ['style-loader', 'css-loader', 'sass-loader'],
+      }
     ],
   },
 };
